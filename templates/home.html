@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take a Bite with B - Order</title>
+    <style>
+        /* Full background image */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('/static/image.png') no-repeat center center fixed;
+            background-size: contain; /* instead of cover */
+            background-attachment: fixed;
+            background-color: #f6e260;
+            font-family: "Georgia", serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Overlay to make text readable */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: -1;
+        }
+
+        /* Header Styling */
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #f5c518;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        p.subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        /* Form Styling */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1); /* transparent glass look */
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 450px; /* smaller container*/
+            margin: 30px auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        input, select, textarea {
+            width: 90%;  /* instead of 100% */
+            padding: 10px 12px;
+            margin: 8px auto;
+            display: block; /* centers them*/
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 8px #f8e50f;
+        }
+
+        button {
+            background: #d4a373;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #b07a4e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay to darken background -->
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <h1>Welcome to Take a Bite </h1>
+    <P>Your sweet journey starts here.</P>
+    <P>Place Your Order</P>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <!-- Customer Details -->
+         <label for="name">Name:</label>
+         <input type="text" id="name" name="name" required><br><br>
+
+         <label for="email">Email:</label>
+         <input type="email" id="email" name="email" required><br><br>
+
+         <label for="phone">Phone Number:</label>
+         <input type="text" id="phone" name="phone" required><br><br>
+
+         <!-- Cake Details -->
+          <label for="size">Cake Size:</label>
+          <select id="size" name="size" required>
+            <option value="4">4 inch</option>
+            <option value="8">8 inch</option>
+            <option value="9">9 inch</option>
+         </select><br><br>
+        
+
+          <label for="layers">Number of Layers:</label>
+          <select id="layers" name="layers" required>
+            <option value="2">2 TAB Small</option>
+            <option value="3">3 TAB Default</option>
+            <option value="4">4 TAB Tall</option>
+          </select><br><br>
+
+          <label for="flavor">Cake Flavor:</label>
+          <select id="flavor" name="flavor" required>
+            <option value="vanilla">Vanilla</option>
+            <option value="red_velvet">Red Velvet</option>
+            <option value="oreo">Oreo</option>
+            <option value="biscoff">Biscoff</option>
+            <option value="lemon">Lemon</option>
+          </select><br><br>
+
+          <label for="filling">Filling:</label>
+          <select id="filling" name="filling" required>
+            <option value="vanilla_buttercream">Vanilla Buttercream</option>
+            <option value="cream_cheese">Cream Cheese</option>
+            <option value="oreo_buttercream">Oreo Buttercream</option>
+            <option value="white_chocolate_ganache">White Chocolate Ganache</option>
+            <option value="lemon_curd">Lemon Curd</option>
+            <option value="biscoff_spread">Biscoff Spread</option>
+          </select><br><br>
+
+          <label for="icing">Icing Flavor:</label>
+          <select id="icing" name="icing" required>
+            <option value="vanilla_buttercream">Vanilla Buttercream</option>
+          </select><br><br>
+
+           <label for="color">Cake Color:</label>
+           <input type="text" id="color" name="color" placeholder="Describe color or theme" required><br><br>
+
+         <!-- Inspiration Image -->
+          <label for="image">Attach Inspiration Picture (optional)</label>
+          <input type="file" id="image" name="image" accept="image/*">
+
+        <!-- Additional Notes -->
+           <label for="notes">Additional Notes:</label>
+           <textarea id="notes" name="notes" rows="4" placeholder="Any other requests..."></textarea>
+
+        <!-- PickUP Date -->
+          <label for="pickup_date">Pickup Date:</label>
+          <input type="date" name="pickup_date" required ><br><br> 
+
+        <!-- Script to enforce 3 weeks ahead rule -->
+          <script>
+            // Calculate 14 days (2 weeks) from today
+            const today = new Date();
+            today.setDate(today.getDate() +14);
+
+            const minDate = today.toISOString().split("T")[0]; // format DD-MM-YYYY (its acc yy/mm/dd)
+            document.querySelector('input[name="pickup_date"]').setAttribute("min", minDate);
+            </script>
+
+        <!-- Notice -->
+          <p style="color: rgb(245, 207, 207); font-weight: bold;">
+                Please note: All order must be picked up from Canvey Island, Essex.
+          </p>
+          
+           <button type="submit">Submit Order</button>
+    </form>
+</body>
+</html>
