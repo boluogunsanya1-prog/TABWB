@@ -21,6 +21,7 @@ def home():
         flavor = request.form.get("flavor")
         filling = request.form.get("filling")
         color = request.form.get("color")
+        cupcakes = request.form.get("cupcakes")
         pickup_date = request.form.get("pickup_date")
         notes = request.form.get("notes")
 
@@ -42,6 +43,8 @@ def home():
         Filling = {filling}
         
         Cake color = {color}
+        
+        Number of Cupcakes = {cupcakes}
         
         Notes = {notes}
         Pickup Date: {pickup_date}
