@@ -45,7 +45,7 @@ def home():
         Cake color = {color}
         
         Number of Cupcakes = {cupcakes}
-        
+
         Notes = {notes}
         Pickup Date: {pickup_date}
         """
@@ -53,7 +53,7 @@ def home():
         # Send email with optional attachment
         send_email(message,file)
 
-        return "Thanks, your order has been received. Take a Bite will be in contact soon!"
+        return render_template("thankyou.html")
         
      # Default GET request - show the form
     return render_template("home.html")
