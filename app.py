@@ -53,7 +53,8 @@ def home():
         # Send email with optional attachment
         send_email(message,file)
 
-        return render_template("thankyou.html")
+        # show thank-you page after submission
+        # return render_template("thankyou.html")
         
      # Default GET request - show the form
     return render_template("home.html")
